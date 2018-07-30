@@ -2,8 +2,9 @@ require "sinatra"
 require "victor"
 require "redis"
 
+redis = Redis.new(url: ENV["REDIS_URL"] || "redis://127.0.0.1:6379")
+
 get '/counter' do
-  redis = Redis.new(url: ENV["REDIS_URL"] || "redis://127.0.0.1:6379")
   redis.incr("counter")
 
   content_type "image/svg+xml"
